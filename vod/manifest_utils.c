@@ -954,6 +954,12 @@ manifest_utils_get_adaptation_sets(
 	{
 		flags |= ADAPTATION_SETS_FLAG_MULTI_AUDIO;
 		output->multi_audio = TRUE;
+
+		// never mux if there are multiple audio tracks
+		if ((flags & ADAPTATION_SETS_FLAG_MUXED) != 0)
+		{
+			flags &= ~ADAPTATION_SETS_FLAG_MUXED;
+		}
 	}
 	else
 	{
